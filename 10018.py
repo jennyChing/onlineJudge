@@ -15,7 +15,7 @@ if __name__ == '__main__':
 			#first for loop takes input line limited to the value of test cases
 			for i in range(0,case_number):
 				n = input()
-				count = 0 
+				count = 0
 				reverse(n, count)
 		except(EOFError):
 			break
