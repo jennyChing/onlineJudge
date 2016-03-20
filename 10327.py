@@ -2,7 +2,6 @@ def flip(ns,flips):
     for i in range(0,n-1):
         if ns[i] > ns[i+1]:
             ns[i], ns[i+1] = ns[i+1],ns[i]
-            print(i,flips)
             flips = flips + 1
             return flip(ns,flips)
         else:
