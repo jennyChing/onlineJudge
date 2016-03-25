@@ -24,7 +24,7 @@ while True:
 							if sum < min or (sum == min and ''.join(bin) < ''.join(min_bin)):
 								min = sum
 								min_bin = bin
-		str_bin = ''.join(min_bin)						
+		str_bin = ''.join(min_bin)
 		print(str_bin, min)
 	except(EOFError):
 		break

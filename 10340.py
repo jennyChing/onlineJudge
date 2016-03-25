@@ -1,3 +1,7 @@
+'''
+Uva online Judge # 10340 All in all:
+Given two strings s and t, you have to decide whether s is a subsequence of t, i.e. if you can remove characters from t such that the concatenation of the remaining characters is s.
+'''
 while True:
     try:
         words = list(map(str, input().split()))

@@ -6,6 +6,7 @@ while True:
             isPair = True
             a = []
             for c in pairs:
+                print(c,pairs)
                 if c == "(" or c == "[":
                     a.append(c)
                 elif c == ")" or c == "]":
