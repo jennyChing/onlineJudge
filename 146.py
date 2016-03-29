@@ -5,28 +5,24 @@ if __name__ == '__main__':
             if ID == ['#']:
                 break
             i = len(ID) - 1 # pointer of checking descendence
-            j = -1 # right remaining parts that need sorting is ID[j+1:]
             start, exchange = None, None
             while i > 0:
-                if ID[i-1] < ID[i]:
-                    j = i-1
-                    start = j
+                if ID[i - 1] < ID[i]:
+                    start = i - 1
                     break
                 i += -1
-            right_min = float("inf")
-            right = ID[j+1:]
-            for c in range(len(right)):
-                if right_min > ord(right[c]):
-                    right_min = ord(right[c])
-                    exchange = j + 1 + c
-            if start != None and exchange != None:
-                ID[start], ID[exchange] = ID[exchange], ID[start]
-                ID[start + 1:] =  sorted(ID[start + 1:])
-                for i in ID:
-                    print(''.join(i),end="")
-                print()
-            else:
+            if start == None:
                 print("No Successor")
+                continue
+            right = ID[start + 1:]
+            for c in range(len(right)):
+                if ord(ID[start]) < ord(right[c]):
+                    exchange = start + 1 + c
+            ID[start], ID[exchange] = ID[exchange], ID[start]
+            ID[start + 1:] = ID[start + 1:][::-1]
+            for i in ID:
+                print(''.join(i), end = "")
+            print()
         except(EOFError):
             break
 

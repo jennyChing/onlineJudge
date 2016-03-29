@@ -1,4 +1,5 @@
 import math
+# only go through prime numbers smaller then n^1/2:
 def prime(n, memo):
     if n in memo:
         return True
