@@ -31,7 +31,7 @@ def change_making(coins, n):
              else:
                  m[c][r] = min(m[c - 1][r], 1 + m[c][r - coins[c - 1]])
      print(len(m[-1]), count)
-     return m[-1][-1]
+     return m
 if __name__ == '__main__':
     coins = [1, 5, 10, 25, 50]
     n = 11
