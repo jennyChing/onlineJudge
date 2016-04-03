@@ -3,6 +3,7 @@ def fib(n):
         fib(n - 1)
     else:
         memo[n] = memo[n - 1] + memo[n - 2]
+        print(memo)
         return memo[n]
 
 if __name__ == "__main__":

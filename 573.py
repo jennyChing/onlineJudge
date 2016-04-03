@@ -7,28 +7,26 @@ if __name__ == '__main__':
     while True:
         try:
             value = list(map(int, input().split()))
-            day = 1
+            day = 0
             H, U, D, F = value[0], value[1], value[2], value[3]
-            h = U - D
-            isFail = False
+            h = 0
             if H == 0:
                 break
-            if U - D > H:
-                break
-            while h < H:
-                day += 1
-                h = h + U * (1 - (F * 0.01 * (day - 1)))
-                print(day, "climb:", U * (day - 1) * (1 - (F * 0.01)), "slide:", D, "height:", h)
-                if h >= H:
+            isFail = False
+            while True:
+                if 0 < U * (1 - 0.01 * F * day):
+                    h += U * (1 - 0.01 * F * day)
+                if h > H:
                     break
                 h -= D
-                if h <= 0:
+                if h < 0:
                     isFail = True
                     break
+                day += 1
             if isFail == True:
-                print("failure on day", day)
+                print("failure on day", day + 1)
             else:
-                print("success on day", day)
+                print("success on day", day + 1)
 
         except(EOFError):
             break
