@@ -1,24 +1,5 @@
-python3 146.py < input 
-aaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaa
-No Successor
-aaaaaaaaaaaaaaaaaaaacaaaaaaaaaaab
-gnh
-dqoggpbdtr
-wnbeel
-eeysyntv
-ub
-gra
-kcioz
-dtbpihvjzc
-ctlmd
-onuovwrff
-ifr
-No Successor
-olmvwai
-oecbhqbvxf
-aurubyibs
-omezc
-kxbuliypmp
-un
-No Successor
-qg
+python3 11462.py < input 
+2 3 4 5 6 7 8 11 12 90
+2
+1 1 1 5 6 12 97
+2 3 4 5 6 7 8 9 10 11 11 16 20 23 54

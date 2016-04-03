@@ -5,8 +5,6 @@ ALWAYS check your input, and make sure using = instead of ==
 '''
 # search through all @s and see if there are @s around it and turn all of them into '*'s recursively (count only when found @ in main function)
 def check(i, j, n, m, f):
-    if i >= 0 and j >= 0 and i < m and j < m and f[i][j] == '*':
-        return
     if i < 0 or i >= m or j < 0 or j >= n or f[i][j] == '*':
         return
     f[i][j] = '*'
