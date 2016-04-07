@@ -9,7 +9,6 @@ while True:
     except(EOFError):
         break
 sen = sen[::-1]
-print(sen)
 p_sen = []
 for j in range(max_len):
     for i in range(len(sen)):
@@ -18,5 +17,7 @@ for j in range(max_len):
             if i == len(sen) - 1:
                 print()
         except(IndexError):
-            print(" ")
+            print(" ", end = "")
+            if i == len(sen) - 1:
+                print()
             continue

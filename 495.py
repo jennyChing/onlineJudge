@@ -1,16 +1,22 @@
+import sys
+
+def init(n):
+    for i in range(2, n + 1):
+        memo[i] = memo[i - 1] + memo[i - 2]
+
 def fib(n):
-    while n - 1 not in memo:
-        fib(n - 1)
-    else:
-        memo[n] = memo[n - 1] + memo[n - 2]
-        print(memo)
-        return memo[n]
+    if n not in memo:
+        memo[n] = fib(n - 1) + fib(n - 2)
+    return memo[n]
 
 if __name__ == "__main__":
+    #sys.setrecursionlimit(5000)
+    memo= {0:0, 1:1}
+    init(5000)
     while True:
         try:
-            memo= {0:0, 1:1, 2:1}
             n = int(input())
             print("The Fibonacci number for", n, "is", fib(n))
+            #print("The Fibonacci number for", n, "is", memo[n])
         except(EOFError):
             break
