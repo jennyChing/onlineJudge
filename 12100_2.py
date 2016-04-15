@@ -18,25 +18,42 @@ One line with a positive integer: the number of test cases (at most 100). Then f
 Output
     For each test case, print one line with a single integer; the number of minutes until your job is completely printed, assuming that no additional print jobs will arrive.
 '''
+def cusMax(list1):
+    max_p = 0
+    for a in list1:
+        if abs(a) > max_p:
+            max_p = abs(a)
+    return max_p
+
+def cal(jobs, m):
+    list1 = jobs
+    list2 = []
+    for priority in range(9):
+        max_priority = cusMax(list1)
+        for i, e in reversed(list(enumerate(list1))):
+            # need to simulate the iteration with 2 lists: loop from back to take the first max in the list as the seperate index, and append all the value after i into the new list, and delete all value equals to max and append the subarray into the new list from the back
+            if abs(jobs[m]) == max_priority:
+                cnt = 0
+                for a in list1:
+                    if a == jobs[m]:
+                        cnt += 1
+                        break
+                    elif a == abs(jobs[m]):
+                        cnt += 1
+                return len(jobs) - len(list1) + cnt
+            elif abs(e) == max_priority:
+                list2 = list1[i + 1:] + [x for x in list1[:i] if x != e]
+                break
+        list1 = list2
+        list2 = []
+
+
 if __name__ == '__main__':
     cases = int(input())
-    for n in range(cases):
+    for _ in range(cases):
         n_m = list(map(int, input().split()))
 # n jobs in the queue and we want to know how many jobs are done when mth job is done
         n, m = n_m[0], n_m[1]
         jobs = list(map(int, input().split()))
-        mint = 0
-        isMax = True
-        first_max = m
-        for i in range(n):
-            # algorithm to use O(n) time to process: sum of priority higher then me and same as me but index small er then me, and same as me after the first high priority after me
-            if i > m and isMax == True :
-                first_max = i
-                #print("first max:", i)
-                isMax = False
-            if jobs[i] > jobs[m] or (jobs[i] == jobs[m] and (i <= m or i > first_max)):
-                #print("i:", jobs[i], i, "m:", jobs[m], m, first_max)
-                mint += 1
-        print(mint)
-
-
+        jobs[m] = - jobs[m]
+        print(cal(jobs, m))
