@@ -11,3 +11,4 @@ if __name__ == '__main__':
         if m and n == 1:
             break
         print(m, n)
+

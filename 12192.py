@@ -27,6 +27,7 @@ Sample Output
 4
 -
 '''
+# go through each line in field[i], and locate one left and one right in each line. Every pair of left and right can form a square, find the largest square and print the value
 def largeSmallest(lst, n):
     print(lst, n)
     l, r = 0, len(lst) - 1
