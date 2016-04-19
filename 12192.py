@@ -29,7 +29,6 @@ Sample Output
 '''
 # go through each line in field[i], and locate one left and one right in each line. Every pair of left and right can form a square, find the largest square and print the value
 def largeSmallest(lst, n):
-    print(lst, n)
     l, r = 0, len(lst) - 1
     temp = None
     while r >= l:
@@ -69,25 +68,25 @@ if __name__ == '__main__':
                 interval = list(map(int, input().split()))
                 small, big = interval[0], interval[1]
                 print("Query", small, big)
-                l, r, u, d = 0, 0, float('inf'), 0
                 i, j = 0, 0
 # find the top line that works for the range
-                while i < N - 1:
-                    a, b = smallLargest(field[i], small), smallLargest(field[i], big)
-
-                    if a != None and a >= l:
-                        l = a
-                    if b != None and b >= r:
-                        r = b
-                    if i < u:
-                        u = i
-                    if i > d:
-                        d = i
+                left = {}
+                right = {}
+                while i < N:
+                    a, b = largeSmallest(field[i], small), smallLargest(field[i], big)
+                    if a != None and field[i][a] <= big:
+                        left[i] = a
+                    if b != None and field[i][b] >= small:
+                        right[i] = b
                     if (a and b != None):
                         i += 1
                     else:
                         i += 1
-                print("u/d/l/r", min(d - u + 1, r - l + 1), d - u, r - l)
+                max_g = 0
+                for k in range(len(left)):
+                    for h in range(len(right)):
+                        max_g = max(max_g, (right[h] - left[k]) * (h - k))
+                print(left, right, max_g)
             print("-")
         except(EOFError):
             break
