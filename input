@@ -1,10 +1,14 @@
-55 27
-55 27
-9 24 1995
-9 24
-1 2 3
-1 2 3 4
-1 2 3
-4 5 6
-1 2
-2 3
+4
+CBA DEF up
+B A down
+BA CD up
+CBA DEF down
+AF BC down
+BA CD down
+CBA DEF down
+A B down
+BA CD down
+CBA DEF down
+B A up
+BA CD down
+

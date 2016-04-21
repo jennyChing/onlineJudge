@@ -1,5 +1,5 @@
 '''
-Set - array
+Set input - array
 496 - Simply Subsets
 
 Input
