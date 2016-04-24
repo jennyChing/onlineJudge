@@ -46,7 +46,6 @@ if __name__ == '__main__':
         for pairs in range(M):
             p = list(map(int, input().split()))
             l, r = p[0] - 1, p[1] - 1
-            print(pairs)
 # both already exists in two different groups: combine the two to the group with smaller index, make sure that other items in the same group are combined as well
             if l in added and r in added:
 ## find which group l and r are in and move all elements in the larger index group into the smaller one (***carefull: do nothing if alreay in the same group!!!)

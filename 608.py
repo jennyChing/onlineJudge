@@ -11,14 +11,92 @@ Output
 For each case, the output will identify the counterfeit coin by its letter and tell whether it is heavy or light. The solution will always be uniquely determined.
 
 Solution:
-    find the balance of coins that are not even, and go through the coins to find the one not appeared in the rest comparison which are even
+    Solve different cases based on how many up/downs are appeared in the 3 weighting results:
+    case1: all evens - see which coin are not in the set called 'real'
+    case2: one up or down - examine each coin appeared in this result and exclude the coins in the set named 'real'
+    case3: two up or down - examine each coin appeared twice in un-even results and exclude the coins in the set named 'real'
+    case4: three up or down - examine each coin appeared three times in the dictionary called feit and exclude the coins in the set named 'real'
+
+New Tips - set:
+    >>> a = set('abracadabra')
+    >>> b = set('alacazam')
+    >>> a                                  # unique letters in a
+    {'a', 'r', 'b', 'c', 'd'}
+    >>> a - b                              # letters in a but not in b
+    {'r', 'd', 'b'}
+    >>> a | b                              # letters in either a or b
+    {'a', 'c', 'r', 'd', 'b', 'm', 'z', 'l'}
+    >>> a & b                              # letters in both a and b
+    {'a', 'c'}
+    >>> a ^ b                              # letters in a or b but not both
+    {'r', 'd', 'b', 'm', 'z', 'l'}
 '''
 def read ():
     coins = []
+    cnt = 0
     for n in range(3):
         c = list(map(str, input().split()))
+        if c[2] != 'even':
+            cnt += 1
         coins.append(c)
-    return coins
+    return coins, cnt
+
+def process_up(i):
+# left is heavy and right is light
+    for left in str(coins[i][0]):
+        if left in real:
+            pass
+        elif left in light:
+            real.add(str(left))
+            pass
+        elif left in heavy:
+            feit[left] += 1
+            pass
+        else:
+            feit[left] = 1
+            heavy.add(str(left))
+        #print(real, heavy, light)
+    for right in str(coins[i][1]):
+        if right in real:
+            pass
+        elif right in heavy:
+            real.add(str(right))
+            pass
+        elif right in light:
+            feit[right] += 1
+            pass
+        else:
+            feit[right] = 1
+            light.add(str(right))
+        #print(real, heavy, light)
+
+def process_down(i):
+# right is heavy and left is light
+    for left in str(coins[i][0]):
+        if left in real:
+            pass
+        elif left in heavy:
+            real.add(str(left))
+            pass
+        elif left in light:
+            feit[left] += 1
+            pass
+        else:
+            light.add(str(left))
+            feit[left] = 1
+        #print(real, heavy, light)
+    for right in str(coins[i][1]):
+        if right in real:
+            pass
+        elif right in light:
+            real.add(str(right))
+            pass
+        elif right in heavy:
+            feit[right] += 1
+            pass
+        else:
+            feit[right] = 1
+            heavy.add(str(right))
 
 if __name__ == '__main__':
     cases = int(input())
@@ -26,89 +104,70 @@ if __name__ == '__main__':
         heavy = set()
         light = set()
         real = set()
-        feit = set()
-        coins = read()
-        for i in range(3):
-            if coins[i][2] == 'even':
-                for left in str(coins[i][0]):
-                    real.add(str(left))
-                for right in str(coins[i][1]):
-                    real.add(str(right))
-            elif coins[i][2] == 'up':
-# left is heavy and right is light
-                for left in str(coins[i][0]):
-                    if left in real:
-                        pass
-                    elif left in light:
-                        real.add(str(left))
-                        pass
-                    elif left in heavy:
-                        feit.add(str(left))
-                        pass
-                    else:
-                        heavy.add(str(left))
-                    #print(real, heavy, light)
-                for right in str(coins[i][1]):
-                    if right in real:
-                        pass
-                    elif right in heavy:
-                        real.add(str(right))
-                        pass
-                    elif right in light:
-                        feit.add(str(right))
-                        pass
-                    else:
-                        light.add(str(right))
-                    #print(real, heavy, light)
-            elif coins[i][2] == 'down':
-# right is heavy and left is light
-                for left in str(coins[i][0]):
-                    if left in real:
-                        pass
-                    elif left in heavy:
-                        real.add(str(left))
-                        pass
-                    elif left in light:
-                        feit.add(str(left))
-                        pass
-                    else:
-                        light.add(str(left))
-                    #print(real, heavy, light)
-                for right in str(coins[i][1]):
-                    if right in real:
-                        pass
-                    elif right in light:
-                        real.add(str(right))
-                        pass
-                    elif right in heavy:
-                        feit.add(str(right))
-                        pass
-                    else:
-                        heavy.add(str(right))
-                    #print(right, "add", real, heavy, light)
-        heavy.difference_update(real)
-        feit.difference_update(real)
-        light.difference_update(real)
-        print(feit, real, heavy, light)
+# store the cnts of how many time each coin appears in up or down
+        feit = {}
+        coins, case = read()
         all_c = {'A','B','C','D','E','F','G','H','I','J','K','L'}
-        if not feit and not heavy and not light:
-            for ac in all_c:
-                if ac not in real:
-                    print(ac, "is the counterfeit coin and it is heavy.")
-        if len(feit) == 1:
-            for f in feit:
-                if f in heavy:
+# Case 1: all even
+        if case == 0:
+            for i in range(3):
+                for left in coins[i][0]:
+                    real.add(left)
+                for right in coins[i][1]:
+                    real.add(right)
+            k = all_c - real
+            for ac in k:
+                print(ac, "is the counterfeit coin and it is heavy.")
+# Cases 2: one up/down
+        elif case == 1:
+            for i in range(3):
+                if coins[i][2] == 'up':
+                    process_up(i)
+                elif coins[i][2] == 'down':
+                    process_down(i)
+                elif coins[i][2] == 'even':
+                    for left in coins[i][0]:
+                        real.add(left)
+                    for right in coins[i][1]:
+                        real.add(right)
+            for f, value in feit.items():
+                if f in heavy and f not in real:
                     print(f, "is the counterfeit coin and it is heavy.")
-                if f in light:
+                if f in light and f not in real:
                     print(f, "is the counterfeit coin and it is light.")
-        else:
-            if len(heavy) == 1:
-                for h in heavy:
-                    print(h, "is the counterfeit coin and it is heavy.")
-            if len(light) == 1:
-                for l in light:
-                    print(l, "is the counterfeit coin and it is light.")
-
-
-
-
+# Cases 3: two up/downs
+        elif case == 2:
+            for i in range(3):
+                if coins[i][2] == 'up':
+                    process_up(i)
+                elif coins[i][2] == 'down':
+                    process_down(i)
+                elif coins[i][2] == 'even':
+                    for left in coins[i][0]:
+                        real.add(left)
+                    for right in coins[i][1]:
+                        real.add(right)
+            for f, value in feit.items():
+                if value == 2:
+                    if f in heavy and f not in real:
+                        print(f, "is the counterfeit coin and it is heavy.")
+                    if f in light and f not in real:
+                        print(f, "is the counterfeit coin and it is light.")
+# Cases 4: two up/downs
+        elif case == 3:
+            for i in range(3):
+                if coins[i][2] == 'up':
+                    process_up(i)
+                elif coins[i][2] == 'down':
+                    process_down(i)
+                elif coins[i][2] == 'even':
+                    for left in coins[i][0]:
+                        real.add(left)
+                    for right in coins[i][1]:
+                        real.add(right)
+            for f, value in feit.items():
+                if value == 3:
+                    if f in heavy and f not in real:
+                        print(f, "is the counterfeit coin and it is heavy.")
+                    if f in light and f not in real:
+                        print(f, "is the counterfeit coin and it is light.")
