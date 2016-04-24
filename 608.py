@@ -13,35 +13,101 @@ For each case, the output will identify the counterfeit coin by its letter and t
 Solution:
     find the balance of coins that are not even, and go through the coins to find the one not appeared in the rest comparison which are even
 '''
+def read ():
+    coins = []
+    for n in range(3):
+        c = list(map(str, input().split()))
+        coins.append(c)
+    return coins
+
 if __name__ == '__main__':
     cases = int(input())
     for _ in range(cases):
-        coins = []
-        even = set()
-        for n in range(3):
-            c = list(map(str, input().split()))
-            coins.append(c)
-        fake, fake_row = None, None
+        heavy = set()
+        light = set()
+        real = set()
+        feit = set()
+        coins = read()
         for i in range(3):
             if coins[i][2] == 'even':
-                for a in str(coins[i][0]):
-                    even.add(str(a))
-                for b in str(coins[i][1]):
-                    even.add(str(b))
-            else:
-                fake_row = i
-        for a in str(coins[fake_row][0]):
-            if a not in even:
-                fake = a
-        for b in str(coins[fake_row][1]):
-            if b not in even:
-                fake = b
-        if coins[fake_row][2] == 'up':
-            print(fake, "is the counterfeit coin and it is light.")
+                for left in str(coins[i][0]):
+                    real.add(str(left))
+                for right in str(coins[i][1]):
+                    real.add(str(right))
+            elif coins[i][2] == 'up':
+# left is heavy and right is light
+                for left in str(coins[i][0]):
+                    if left in real:
+                        pass
+                    elif left in light:
+                        real.add(str(left))
+                        pass
+                    elif left in heavy:
+                        feit.add(str(left))
+                        pass
+                    else:
+                        heavy.add(str(left))
+                    #print(real, heavy, light)
+                for right in str(coins[i][1]):
+                    if right in real:
+                        pass
+                    elif right in heavy:
+                        real.add(str(right))
+                        pass
+                    elif right in light:
+                        feit.add(str(right))
+                        pass
+                    else:
+                        light.add(str(right))
+                    #print(real, heavy, light)
+            elif coins[i][2] == 'down':
+# right is heavy and left is light
+                for left in str(coins[i][0]):
+                    if left in real:
+                        pass
+                    elif left in heavy:
+                        real.add(str(left))
+                        pass
+                    elif left in light:
+                        feit.add(str(left))
+                        pass
+                    else:
+                        light.add(str(left))
+                    #print(real, heavy, light)
+                for right in str(coins[i][1]):
+                    if right in real:
+                        pass
+                    elif right in light:
+                        real.add(str(right))
+                        pass
+                    elif right in heavy:
+                        feit.add(str(right))
+                        pass
+                    else:
+                        heavy.add(str(right))
+                    #print(right, "add", real, heavy, light)
+        heavy.difference_update(real)
+        feit.difference_update(real)
+        light.difference_update(real)
+        print(feit, real, heavy, light)
+        all_c = {'A','B','C','D','E','F','G','H','I','J','K','L'}
+        if not feit and not heavy and not light:
+            for ac in all_c:
+                if ac not in real:
+                    print(ac, "is the counterfeit coin and it is heavy.")
+        if len(feit) == 1:
+            for f in feit:
+                if f in heavy:
+                    print(f, "is the counterfeit coin and it is heavy.")
+                if f in light:
+                    print(f, "is the counterfeit coin and it is light.")
         else:
-            print(fake, "is the counterfeit coin and it is heavy.")
-
-
+            if len(heavy) == 1:
+                for h in heavy:
+                    print(h, "is the counterfeit coin and it is heavy.")
+            if len(light) == 1:
+                for l in light:
+                    print(l, "is the counterfeit coin and it is light.")
 
 
 

@@ -21,18 +21,55 @@ There is a town with N citizens. It is known that some pairs of people are frien
 1 2
 9 10
 8 9 --> largest group: 1, 2, 3, 4, 5, 6, 7: 7 ppl
+Solution 1:
+    Open an array of N groups and check each pair to move the ppl to correct group.
+    Return the group with the largest number of ppl (implement refer to: 101 - The Blocks Problem
+
+Solution 2:
+    Use a dictionary that maps the ppl and group they belongs to: key is ppl's number and value is the group number
 '''
 if __name__ == '__main__':
     cases = int(input())
     for _ in range(cases):
-        N_M = list(map(int, input().split()))
-        N, M = N_M[0], N_M[1]
-        ppl = []
-        for n in range(N):
-            ppl.append[i]
-        print(ppl)
+        N, M = list(map(int, input().split()))
+        ppl = {}
+        groups = 0
         for pairs in range(M):
             p = list(map(int, input().split()))
+            l, r = p[0] - 1, p[1] - 1
+# both already exists in two different groups: combine the two to the group with smaller index
+            if l in ppl and r in ppl and ppl[l] != ppl[r]:
+                min_g = min(l, r)
+                ppl[l] = ppl[r] = ppl[min_g]
+# one exist and the other does not: add the new one into the same group
+            elif l in ppl and r not in ppl:
+                ppl[r] = ppl[l]
+            elif l not in ppl and r in ppl:
+                ppl[l] = ppl[r]
+# both doesn't exits: open a new group and add both into the new group
+            elif l not in ppl and r not in ppl:
+                ppl[l] = ppl[r] = groups
+                groups += 1
+        cnt = {}
+# use ppl's value as keys and count every time when such value exists in ppl
+        for i in range(groups):
+            for j in range(len(ppl)):
+                try:
+                    if ppl[j] == i:
+                        if i in cnt:
+                            cnt[i] += 1
+                        else:
+                            cnt[i] = 1
+                except(KeyError):
+                    pass
+        print(ppl)
+        print(cnt)
+        print(max(cnt.values()))
+
+
+
+
+
 
 
 

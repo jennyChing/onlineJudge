@@ -18,7 +18,7 @@ if __name__ == '__main__':
     for _ in range(cases):
         left = [0] * 12
         right = [0] * 12
-        even = set()
+        real = set()
         isUp, isDown = 0, 0
         for n in range(3):
             c = list(map(str, input().split()))
@@ -31,9 +31,9 @@ if __name__ == '__main__':
                     right[ord(b) - ord('A')] += 1
             else:
                 for a in str(c[0]):
-                    even.add(a)
+                    real.add(a)
                 for b in str(c[1]):
-                    even.add(b)
+                    real.add(b)
         max_c, max_i = 0, 0
         print(left, right)
         for i, v in enumerate(left):

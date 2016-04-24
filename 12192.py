@@ -26,26 +26,28 @@ Sample Output
 2
 4
 -
+Solution:
+ go through each line in field[i], and locate one left and one right in each line. Every pair of left and right can form a square, find the largest square and print the value
+ for every upper-left, check if their lower-right is illigible. If not, length - 1 and check again the lower-right
 '''
-# go through each line in field[i], and locate one left and one right in each line. Every pair of left and right can form a square, find the largest square and print the value
-def largeSmallest(lst, n):
+def largeSmallest(lst, target):
     l, r = 0, len(lst) - 1
     temp = None
     while r >= l:
         m = (l + r) // 2
-        if n > lst[m]:
+        if target > lst[m]:
             l = m + 1
         else:
             temp = m
             r = m - 1
     return temp
 
-def smallLargest (lst, n):
+def smallLargest (lst, target):
     l, r = 0, len(lst) - 1
     temp = None
     while r >= l:
         m = (l + r) // 2
-        if n < lst[m]:
+        if target < lst[m]:
             r = m - 1
         else:
             temp = m
@@ -55,20 +57,17 @@ def smallLargest (lst, n):
 if __name__ == '__main__':
     while True:
         try:
-            N_M = list(map(int, input().split()))
-            N, M = N_M[0], N_M[1]
+            N, M = list(map(int, input().split()))
             if N and M == 0:
                 break
             field = [ [] for i in range(N) ]
             for i in range(N):
-                ms = list(map(int, input().split()))
-                field[i] = ms
+                field[i] = list(map(int, input().split()))
             queries = int(input())
             for _ in range(queries):
-                interval = list(map(int, input().split()))
-                small, big = interval[0], interval[1]
+                small, big = list(map(int, input().split()))
                 print("Query", small, big)
-                i, j = 0, 0
+                i = 0
 # find the top line that works for the range
                 left = {}
                 right = {}
@@ -78,10 +77,7 @@ if __name__ == '__main__':
                         left[i] = a
                     if b != None and field[i][b] >= small:
                         right[i] = b
-                    if (a and b != None):
-                        i += 1
-                    else:
-                        i += 1
+                    i += 1
                 max_g = 0
                 for k in range(len(left)):
                     for h in range(len(right)):
