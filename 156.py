@@ -19,14 +19,17 @@ Solution:
 
 def read():
     words = []
+    ref = []
     wd_cnt = 0
     while True:
         line = list(map(str, input().split()))
+        ref = ref + line
         if line == ['#']:
-            return words
+            return words, ref
         for i in range(len(line)):
+            words.append({})
+            line[i] = line[i].lower()
             for c in line[i]:
-                words.append({})
                 if c not in words[wd_cnt]:
                     words[wd_cnt][c] = 1
                 else:
@@ -34,7 +37,25 @@ def read():
             wd_cnt += 1
 
 if __name__ == '__main__':
-    print(read())
+    dic, ref = read()
+    record = [None] * len(dic)
+    for i in range(len(dic)):
+        for j in range(len(dic)):
+            isAnagram = True
+            if i != j:
+                if dic[i] == dic[j]:
+                    record[i] = True
+    temp = []
+    for k in range(len(record)):
+        if record[k] == None:
+            temp.append(ref[k])
+    temp = sorted(temp)
+    for l in temp:
+        print(l)
+            #for c in dic[i]:
+             #   print(c, end = '')
+        #print()
+
 
 
 
