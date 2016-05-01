@@ -8,18 +8,23 @@ Input consists of up to 100,000 dictionary entries, followed by a blank line, fo
 Output
 Output is the message translated to English, one word per line. Foreign words not in the dictionary should be translated as ‘eh’.
 '''
+
+def read_words():
+    dic = {}
+    while True:
+        w = list(map(str, input().split()))
+        if len(w) == 0:
+            return dic
+        else:
+            dic[w[1]] = w[0]
+
+
 if __name__ == '__main__':
-    dic = []
+    dic = read_words()
     while True:
         try:
-            w = list(map(str, input().split()))
-            if len(w) == 1:
-                print(w[0], w[0] in dic)
-                print(dic[w]) if w[0] in dic else print('eh')
-            else:
-                dic.append({w[1]: w[0]})
-                print(dic)
-
+            q = input()
+            print(dic[q]) if q in dic else print('eh')
         except(EOFError):
             break
 
