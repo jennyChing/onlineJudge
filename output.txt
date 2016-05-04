@@ -1,16 +1,6 @@
-python3 608.py < input 
-D is the counterfeit coin and it is light.
-J is the counterfeit coin and it is heavy.
-A is the counterfeit coin and it is heavy.
-E is the counterfeit coin and it is light.
-L is the counterfeit coin and it is heavy.
-C is the counterfeit coin and it is light.
-F is the counterfeit coin and it is light.
-F is the counterfeit coin and it is heavy.
-L is the counterfeit coin and it is light.
-A is the counterfeit coin and it is heavy.
-A is the counterfeit coin and it is heavy.
-A is the counterfeit coin and it is heavy.
-A is the counterfeit coin and it is light.
-A is the counterfeit coin and it is light.
-A is the counterfeit coin and it is light.
+python3 492.py < input 
+Appleay 
+hisTay 
+;'/.,][                 -()*&^%$#@! 
+ Aay aay            Eay       eay oay Ooay Uay uay iay                            Iay 
+    heTay uIckqay rOwnbay Oxfay umpsjay OVERay hetay AzyLay oGday       . 
