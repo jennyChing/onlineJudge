@@ -34,7 +34,6 @@ if __name__ == '__main__':
                 if i != j and k not in words[j]:
                     #print(words[j], k, i, j)
                     record[i] = False
-
             #dominate.append(ref[i])
     print(record)
     #for c in dominate:

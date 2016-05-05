@@ -18,16 +18,18 @@ if __name__ == '__main__':
     value = read()
     for i in range(len(value)):
         temp = value[i][0]
-        max_LIS = []
         for j in range(i + 1, len(value)):
             if value[j][0] > temp:
                 temp = value[j][0]
                 value[i].append(value[j][0])
-    max_len = 1
-    for i in range(len(value)):
-        if len(value[i]) > max_len:
-            print(value[i])
     print(value)
-
-
-
+    for i in range(len(value)):
+        for j in range(i, 0, -1):
+            if value[j][0] < value[i][0]:
+                value[i].insert(0, value[j][0])
+    print(value)
+    max_len = sorted(max(value, key = len))
+    print(len(max_len))
+    print('-')
+    for l in max_len:
+        print(l)
