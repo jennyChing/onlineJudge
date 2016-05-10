@@ -13,9 +13,26 @@ For each test case display the line ‘Case k is a tree.’ or the line ‘Case 
 '''
 case = 0
 tree = {}
-reverse = []
 root = set()
-traveled = set()
+
+def travel(s, e, tree, traveled):
+    try:
+        traveled[tree[e]] = tree[s]
+    except(KeyError):
+        break
+    if e in tree:
+        travel(e, tree[e], traveled)
+
+def traveled(root, tree):
+    traveled = {}
+    print(root, tree)
+    for k, v in tree.items():
+        if v == root:
+            travel(root, k, tree, traveled)
+    print(traveled)
+    return True
+
+
 isTree = True
 if __name__ == '__main__':
     while True:
@@ -29,11 +46,18 @@ if __name__ == '__main__':
                         if k in root:
                             root.remove(k)
                     case += 1
-                    if len(reverse) > 1:
+
+                    if len(root) == 1:
+                        for e in root:
+                            root_e = e
+                    else:
                         isTree = False
-                    reverse = []
-                    traveled = set()
-                    if isTree == True and len(root) == 1 or len(tree) == 0:
+
+                    isTree = traveled(root_e, tree)
+
+                    if len(tree) == len(root) == 0:
+                        print("Case ", case, " is a tree.", sep = "")
+                    elif isTree == True:
                         print("Case ", case, " is a tree.", sep = "")
                     else:
                         print("Case ", case, " is not a tree.", sep = "")
@@ -41,37 +65,8 @@ if __name__ == '__main__':
                     root = set()
                     isTree = True
                 else:
-                    if t[i + 1] not in tree:
+                    if t[i] != t[i + 1] and t[i + 1] not in tree:
                         tree[t[i + 1]] = t[i]
-                        if t[i] in traveled and t[i + 1] in traveled:
-                            l, r = None, None
-                            for a in range(len(reverse)):
-                                if t[i + 1] in reverse[a]:
-                                    r = a
-                                elif t[i] in reverse[a]:
-                                    l = a
-                            if l != r and l != None and r != None:
-                                temp = reverse[l].copy()
-                                delete = l
-                                reverse[r].update(temp)
-                                reverse.pop(delete)
-                        if t[i] in traveled or t[i + 1] in traveled:
-                            for a in range(len(reverse)):
-                                if t[i + 1] in reverse[a]:
-                                    reverse[a].add(t[i])
-                                    traveled.add(t[i])
-                                    break
-                                elif t[i] in reverse[a]:
-                                    reverse[a].add(t[i + 1])
-                                    traveled.add(t[i + 1])
-                                    break
-                        else:
-                            traveled.add(t[i])
-                            traveled.add(t[i + 1])
-                            temp = set()
-                            temp.add(t[i])
-                            temp.add(t[i + 1])
-                            reverse.append(temp)
                         root.add(t[i])
                     else:
                         isTree = False
