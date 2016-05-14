@@ -12,13 +12,6 @@ For each set of input, you are to output a single line containing a single integ
 v_list = []
 v_len = 0
 
-def adj(v_list):
-    v_adj = [ [ 0 for i in range(v_len) ] for j in range(v_len)]
-    for v in v_list:
-        v_adj[v[0] - 1][v[1] - 1] = v[2]
-        v_adj[v[1] - 1][v[0] - 1] = v[2]
-    return v_adj
-
 def DFS(x, px, v_adj, dia): # px is the father of p
     print("dia", dia)
     h1, h2 = 0, 0 # record the first and second height
@@ -39,7 +32,7 @@ def diameter(v_list):
     dia = 0
     v_adj = adj(v_list) # turn the adjacency list into matrix
     print(v_adj)
-    root = 6 # every node in a tree can be the root
+    root = 5  # every node in a tree can be the root
     return DFS(root, root, v_adj, dia)
 
 if __name__ == '__main__':
@@ -47,11 +40,11 @@ if __name__ == '__main__':
         try:
             v = list(map(int, input().split()))
             if len(v) == 0:
-                print("LAST", diameter(v_list)[1])
+                print("LAST", adj(v_list)[1])
                 v_list = []
             else:
                 v_len = max(v[0], v[1], v_len)
                 v_list.append(v)
         except(EOFError):
-            print("LAST", diameter(v_list)[1])
+            print("LAST", adj(v_list)[1])
             break
