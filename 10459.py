@@ -11,6 +11,7 @@ For each dataset print two lines. In the 1st line show all the best roots in asc
 line show all worst roots in ascending order. See sample output for exact format.
 '''
 def DFS(tree, p, px, h):
+    print(h, tree[p], tree[tree[p]], p, px)
     if p in tree and px != tree[p]:
         h += 1
         DFS(tree, tree[p], tree[tree[p]], h)
@@ -21,13 +22,13 @@ if __name__ == '__main__':
     while True:
         try:
             tree = {}
-            h = 1
+            h = 0
             N = int(input())
             for i in range(N):
                 node = list(map(int, input().split()))
                 for j in range(1, len(node)):
                     tree[i + 1] = node[j]
-            root = 1
+            root = 2
             print(DFS(tree, root, root, h))
         except(EOFError):
             break

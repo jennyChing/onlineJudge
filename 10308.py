@@ -31,7 +31,7 @@ def DFS(x, px, v_adj, dia): # px is the father of p
             elif h > h2:
                 h = h
     dia = max(dia, h1 + h2)
-    print("end", dia)
+    print("end", h1, dia)
     return h1, dia
 
 
@@ -39,7 +39,7 @@ def diameter(v_list):
     dia = 0
     v_adj = adj(v_list) # turn the adjacency list into matrix
     print(v_adj)
-    root = 6 # every node in a tree can be the root
+    root = 0 # every node in a tree can be the root
     return DFS(root, root, v_adj, dia)
 
 if __name__ == '__main__':
