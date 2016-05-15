@@ -11,27 +11,24 @@ For each set of input, you are to output a single line containing a single integ
 '''
 v_list = {}
 
-
-def DFS(x, px, v_list, dia, trav): # px is the father of p
-    h1, h2 = 0, 0 # record the first and second height of the subtree under the current node
-    for y in range(len(v_list)):
-        if x in v_list and y != px and y in v_list[x] and y not in trav:
-            h = DFS(y, x, v_list, DFS(y, x, v_list, dia, trav)[1], trav)[0] + v_list[y][x]
-            trav.add(x)
-            print("Here", x, v_list[x], px, y, v_list[y])
+def DFS(x, px): # px is the father of p
+    h1, h2, dia = 0, 0, 0 # record the first and second height of the subtree under the current node
+    for y, v in v_list[x].items():
+        if y != px and y in v_list[x]:
+            h, c_dia = DFS(y, x) # c_dia is the local diaometer that doesn't pass me
+            h = h + v_list[x][y]
+# find the highest 2 routes in subtree
             if h > h1:
                 h2, h1 = h1, h
             elif h > h2:
                 h2 = h
-        dia = max(dia, h1 + h2)
+            dia = max(dia, c_dia) # global dia and local c_dia
+    dia = max(dia, h1 + h2) # dia stored in the outtest DFS recursive function
     return h1, dia
 
-
 def diameter(v_list):
-    dia = 0
-    trav = set()
-    root = 6  # every node in a tree can be the root
-    return DFS(root, root, v_list, dia, trav)
+    root = 1
+    return DFS(root, root)
 
 if __name__ == '__main__':
     while True:
