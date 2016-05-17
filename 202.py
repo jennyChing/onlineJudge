@@ -12,18 +12,36 @@ getcontext().prec = 1000
 def fractionToDecimal(n, d):
     sign = '-' if n * d < 0 else ''
     head, remainder = divmod(abs(n), abs(d))
-    tail, see = '', {}
+    tail, seen = '', {}
+    isCycle = False
     while remainder != 0:
         if remainder in seen:
-            tail = tail[: seen[remainder]]
+            tail = tail[: seen[remainder]] + '(' + tail[seen[remainder]:] + ')'
+            isCycle = True
+            break
+        seen[remainder] = len(tail)
+        digit, remainder = divmod(remainder * 10, abs(d))
+        tail += str(digit)
+    return sign + str(head) + tail and '.' + tail, isCycle, seen, remainder
+
+cnt = 0
 
 if __name__ =='__main__':
     while True:
         try:
-            n1, n2 = list(map(int, input().split()))
+            n, d = list(map(int, input().split()))
         except(EOFError):
             break
-
-        t = Decimal(n1) / Decimal(n2)
-        print(t)
-
+        frac, isCycle, seen, remainder = fractionToDecimal(n, d)
+        if cnt > 0:
+            print()
+        if isCycle == False:
+            print(n, '/', d, ' = ', n//d, frac, '(0)', sep="")
+            print("   1 = number of digits in repeating cycle")
+        elif len(frac) > 50:
+            print(n, '/', d, ' = ', n//d, frac[:52], '...)', sep="")
+            print("  ", len(frac) - 3 - seen[remainder], "= number of digits in repeating cycle")
+        else:
+            print(n, '/', d, ' = ', n//d, frac, sep="")
+            print("  ", len(frac) - 3 - seen[remainder], "= number of digits in repeating cycle")
+        cnt += 1
