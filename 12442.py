@@ -20,15 +20,17 @@ def find_group(n):
 
 if __name__ == '__main__':
     case = int(input())
-    for _ in range(case):
+    for cases in range(case):
         n = int(input())
-        pairs = {}
+        left = set()
+        right = set()
         added = set()
         group = 0
         ppl = []
         for i in range(n):
             l, r = list(map(int, input().split()))
-            pairs[l] = r
+            left.add(l)
+            right.add(r)
 # Case 1: both already exists (in two different groups): combine the two to the group with smaller index, make sure that other items in the same group are combined as well
 ## find which group l and r are in and move all elements in the larger index group into the smaller one (***carefull: do nothing if alreay in the same group!!!)
             if l in added and r in added:
@@ -60,6 +62,14 @@ if __name__ == '__main__':
         for i in range(len(ppl)):
             if len(largest_g) < len(ppl[i]):
                 largest_g = ppl[i]
-        print(largest_g, ppl, pairs)
-
+        print(largest_g, l, r, ppl)
+        for u in largest_g:
+            if u in left and u not in right:
+                print(u)
+                print("Case ", cases + 1, ': ', u, sep = "")
+                isCycle = False
+                break
+            isCycle = True
+        if isCycle == True:
+            print("Case ", cases + 1, ': ', min(largest_g), sep = "")
 

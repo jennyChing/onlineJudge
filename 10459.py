@@ -10,25 +10,48 @@ Output
 For each dataset print two lines. In the 1st line show all the best roots in ascending order and in next
 line show all worst roots in ascending order. See sample output for exact format.
 '''
-def DFS(tree, p, px, h):
-    print(h, tree[p], tree[tree[p]], p, px)
-    if p in tree and px != tree[p]:
-        h += 1
-        DFS(tree, tree[p], tree[tree[p]], h)
-        print(h, tree[p], tree[tree[p]])
-    return h
+def DFS(x, px):
+# y is the node number and x is the index number (y = x + 1)
+    for y in tree[x]:
+        if y != px  and y in tree[x]:
+            depth[y - 1] = depth[x] + 1
+            DFS(y - 1, x + 1)
+
 
 if __name__ == '__main__':
     while True:
         try:
-            tree = {}
-            h = 0
-            N = int(input())
+            tree = []
+# store the tree as array mapped by index instead of storing as dictionary
+            N = input()
+            while len(N) == 0:
+                N = input()
+            N = int(N)
             for i in range(N):
                 node = list(map(int, input().split()))
-                for j in range(1, len(node)):
-                    tree[i + 1] = node[j]
-            root = 2
-            print(DFS(tree, root, root, h))
+                tree.append(node[1:])
+            min_def, max_def = float('inf'), 0
+            depth_all = [] * N
+            for j in range(N):
+                depth = [1] * N
+                DFS(j, j + 1)
+                depth_all.append(depth)
+                min_def = min(max(depth), min_def)
+                max_def = max(max(depth), max_def)
+            best_root, worst_root = [], []
+            for k in range(N):
+                if max(depth_all[k]) == max_def:
+                    worst_root.append(k + 1)
+                elif max(depth_all[k]) == min_def:
+                    best_root.append(k + 1)
+            print("Best Roots  :", end = "")
+            for i in best_root:
+                print('', i, end = "")
+            print()
+            print("Worst Roots :", end = "")
+            for i in worst_root:
+                print('', i, end = "")
+            print()
+
         except(EOFError):
             break
