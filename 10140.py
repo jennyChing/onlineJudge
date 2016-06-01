@@ -12,7 +12,7 @@ Your program is given 2 numbers: L and U (1 ≤ L < U ≤ 2, 147, 483, 647), and
 
 # primes within (1000000^1/2)
 def prime():
-    isPrime = [True for _ in range(2147483647)] # 2 * i + 1= n
+    isPrime = [True for _ in range(21474830)] # 2 * i + 1= n
     isPrime[0], isPrime[1] = False, False
     buff = set()
     for i in range(len(isPrime)):
