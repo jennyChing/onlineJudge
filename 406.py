@@ -14,7 +14,7 @@ should be followed by a blank line. Hence, your output should follow the exact f
 '''
 import math
 def prime():
-    isPrime = [True for _ in range(100000)] # 2 * i + 1= n
+    isPrime = [True for _ in range(1000)] # 2 * i + 1= n
     isPrime[0], isPrime[1] = False, False
     buff = set()
     for i in range(len(isPrime)):
