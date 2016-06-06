@@ -50,6 +50,7 @@ def solve(par):
 if __name__ == '__main__':
     Primes = set([2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37])
     cases = 0
+    memo = {}
     while True:
         try:
             n = int(input())
@@ -57,8 +58,12 @@ if __name__ == '__main__':
             break
         cases += 1
         if cases > 1:
-            print()
-        results = solve(n)
+            print(memo)
+        if n in memo:
+            results = memo[n]
+        else:
+            results = solve(n)
+            memo[n] = results
         print("Case ", cases, ':', sep="")
         for r in results:
             print(r)
