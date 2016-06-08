@@ -11,5 +11,6 @@ if __name__ == '__main__':
     for _ in range(cases):
         content = input()
         for i in range(len(content)):
+            if
 
 
