@@ -31,5 +31,5 @@ if __name__ == '__main__':
     for _ in range(cases):
         word = input()
         len_pal, pali = pal(word)
-        print(len_pal[1])
+        print(len_pal)
 
