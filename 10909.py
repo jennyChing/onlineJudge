@@ -29,7 +29,7 @@ if __name__ == '__main__':
             lucky = cal_lucky()
             isLucky = False
             a, b = 0, 0
-            for i in range(1, n):
+            for i in range(1, n // 2):
                 if i in lucky and n - i in lucky:
                     isLucky = True
                     a, b = i, n - i

@@ -28,10 +28,8 @@ def pal(word):
 
 if __name__ == '__main__':
     cases = int(input())
-    print(cases)
     for _ in range(cases):
         word = input()
-        print(word)
         len_pal, pali = pal(word)
         print(len_pal[1])
 
