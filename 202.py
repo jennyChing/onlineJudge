@@ -33,8 +33,8 @@ if __name__ =='__main__':
         except(EOFError):
             break
         frac, isCycle, seen, remainder = fractionToDecimal(n, d)
-        if cnt > 0:
-            print()
+        #if cnt > 0:
+        print()
         if isCycle == False:
             print(n, '/', d, ' = ', n//d, frac, '(0)', sep="")
             print("   1 = number of digits in repeating cycle")
