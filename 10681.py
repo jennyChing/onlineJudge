@@ -25,19 +25,27 @@ if __name__ == '__main__':
         C, L = list(map(int, input().split()))
         if C == 0 and L == 0:
             break
-        links = {}
-        trav = set()
+# store graph in a adj matrix
+        graph =  [[ 0 for i in range(C + 1) ] for j in range(C + 1)]
         for _ in range(L):
             c1, c2 = list(map(int, input().split()))
-            if c1 not in links:
-                links[c1] = set()
-            links[c1].add(c2)
-            if c2 not in links:
-                links[c2] = set()
-            links[c2].add(c1)
-        print(links)
+            graph[c1][c2] = 1
+            graph[c2][c1] = 1
         S, E, D = list(map(int, input().split()))
-        print(DFS(S, E, D, links, trav))
-        print(trav)
+# use dynamic programming to store the cities traveled and see if the trip can start from S to E
+        dp = [[ 0 for i in range(D + 1) ] for j in range(C + 1)]
+# initial the traversal from S start and apply the ijk reachability algorithm
+        dp[S][0] = 1
+        for d in range(1, D + 1):
+            for c in range(1, C + 1):
+                for c1 in range(1, C + 1):
+                    if c1 != c and dp[c1][d - 1] and graph[c1][c]:
+                        dp[c][d] = 1
+                        break
+# see if the dp records traversal results that E end is reached
+        if dp[E][D] == 1:
+            print('Yes, Teobaldo can travel.')
+        else:
+            print('No, Teobaldo can not travel.')
         empty = input()
 
