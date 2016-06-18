@@ -16,7 +16,17 @@ if __name__ == '__main__':
         isPoss = True
         if sum(degrees) % 2 == 1:
             isPoss = False
-
+        sorted_d = sorted(degrees, reverse=True)
+        if sorted_d[0] > n:
+            isPoss = False
+        else:
+            while sum(sorted_d) > 0 and len(sorted_d) > sorted_d[0]:
+                for i in range(sorted_d[0]):
+                    if sorted_d[i + 1] == 0:
+                        isPoss = False
+                        break
+                    sorted_d[i + 1] -= 1
+                sorted_d.pop(0)
         if isPoss == False:
             print("Not possible")
         else:
