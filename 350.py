@@ -8,11 +8,13 @@ A common pseudo-random number generation technique is called the linear congruen
 In this problem you will be given sets of values for Z, I, M, and the seed, L. Each of these will have no more than four digits. For each such set of values you are to determine the length of the cycle of pseudo-random numbers that will be generated. But be careful: the cycle might not begin with the seed!
 '''
 def mod(Z, I, M, L):
-    remain = (Z * L + I) % M
-    if remain in seen:
-        return seen
-    seen.add(remain)
-    mod(Z, I, M, remain)
+    cnt = 0
+    while True:
+        remain = (Z * L + I) % M
+        L = remain
+        if remain in seen:
+            return len(seen)
+        seen.add(remain)
 
 case = 0
 if __name__ == '__main__':
