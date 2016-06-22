@@ -1,6 +1,6 @@
 '''
 Topological Ordering
-
+只要反覆尋找沒有被任何邊連向的點，然後刪去此點以及刪去由此點連出去的邊，就可以找出一個合理的排列順序了。v
 10305 - Ordering Tasks
 
 Input
@@ -28,7 +28,6 @@ if __name__ == '__main__':
                 pass
             else:
                 while True:
-                    if order[i]
                     if order[i] not in order and order[i] not in trav:
                         trav.add(order[i])
                         task_order.append(order[i])
