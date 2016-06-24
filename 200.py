@@ -46,11 +46,16 @@ if __name__ == '__main__':
         s1 = words[i - 1]
         s2 = words[i]
         for j in range(min(len(s1), len(s2))): # compare the words in order
+            print(i, j, s1, s2)
             if s1[j] != s2[j]:
                 if s1[j] not in st:
                     st[s1[j]]= []
+                    print(st)
                 if s2[j] not in st:
                     st[s2[j]]= []
+                    print(st)
                 st[s1[j]].append(s2[j])
+                print(i, j, s1[j], s2[j], st)
                 break
+    print(st)
     print(''.join(topoSort(st)))
