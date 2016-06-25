@@ -12,6 +12,7 @@ The Output
 For each constraint specification, all orderings consistent with the constraints should be printed. Orderings are printed in lexicographical (alphabetical) order, one per line.
 Output for different constraint specifications is separated by a blank line.
 '''
+
 if __name__ == '__main__':
     while True:
         try:
@@ -25,7 +26,7 @@ if __name__ == '__main__':
                 cons[constrain[i + 1]] = [constrain[i]]
             else:
                 cons[constrain[i + 1]].append(constrain[i])
-        print(cons)
+
 
 
 

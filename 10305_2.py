@@ -14,20 +14,26 @@ from collections import defaultdict
 def topoSort(nodes, graph):
     visited = {}
     result = []
-        # this vector stores topological sort in reverse order
+    # this vector stores topological sort in reverse order
     for v in nodes:
         visited[v] = 0
 
+    # visit the node u and visit the nodes related to node u
     def topoVisit(u):
         visited[u] = 1
+        print(visited, graph[u], result)
         for v in graph[u]:
             if not visited[v]:
                 topoVisit(v)
+                print(result)
         result.append(u)  # this is the only change
 
+    # loop through the nodes and check if it is visited, if not, topoVisit the node
     for v in nodes:
         if not visited[v]:
             topoVisit(v)
+
+    # result is generated from the backtracking method
     result.reverse()
     print(' '.join([str(e) for e in result]))
 
@@ -41,5 +47,5 @@ if __name__ == '__main__':
         for i in range(m):
             v1, v2 = list(map(int, input().split()))
             graph[v1].append(v2)
-        # print graph
+        print(graph.items())
         topoSort(nodes, graph)
