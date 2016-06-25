@@ -12,11 +12,19 @@ The Output
 For each constraint specification, all orderings consistent with the constraints should be printed. Orderings are printed in lexicographical (alphabetical) order, one per line.
 Output for different constraint specifications is separated by a blank line.
 '''
+import itertools
+
+def list_perm(char):
+    perms = []
+    for x in itertools.permutations(char, len(char)):
+        perms.append(x)
+    return perms
+
 
 if __name__ == '__main__':
     while True:
         try:
-            v = list(map(str, input().split()))
+            char = sorted(list(map(str, input().split())))
             constrain = list(map(str, input().split()))
         except(EOFError):
             break
@@ -26,6 +34,8 @@ if __name__ == '__main__':
                 cons[constrain[i + 1]] = [constrain[i]]
             else:
                 cons[constrain[i + 1]].append(constrain[i])
+        valid_order = []
+        used = [False] * len(char)
 
 
 
