@@ -12,7 +12,7 @@ The Output
 For each constraint specification, all orderings consistent with the constraints should be printed. Orderings are printed in lexicographical (alphabetical) order, one per line.
 Output for different constraint specifications is separated by a blank line.
 '''
-
+cases = 0
 if __name__ == '__main__':
     while True:
         try:
@@ -20,9 +20,12 @@ if __name__ == '__main__':
             constrain = list(map(str, input().split()))
         except(EOFError):
             break
-        MAXN = 26
+        if cases > 0:
+            print()
+        cases += 1
 
 # use a graph to store the eligible paths
+        MAXN = 26
         graph = [[ 0 for x in range(MAXN)] for y in range(MAXN)]
         nodes = [ord(c) - ord('a') for c in char]
         nodes.sort()
@@ -52,7 +55,6 @@ if __name__ == '__main__':
                     path.pop()
                     used[i] = False
         perm(0)
-        print()
 
 
 
