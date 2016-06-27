@@ -8,7 +8,34 @@ The first line contains the number C of test cases that follow (0 < C < 1000).  
 
 Output
 For each input case your program must output the information about the courses that have prerequisites.  Each line must contain the name of the course, the number of prerequisites it has, and the names of the courses that are its prerequisites, separated by a single space.  Within each test case, the courses must be listed ordered by name, and the list of prerequisites for each course must also be ordered by course name.
+
+Solution
+Find one course's prerequisites and delete all its prerequisites
+只 care 先修課的先修課是否出現在他所有的 prerequisites 中
+不能只比較兩層，因為上一層 pre 中不一定會列出全部的先修課！
 '''
+def DFS(constrain):
+    for k, v in constrain.items():
+        for c in v:
+            if c in constrain:
+                constrain[k].union(constrain[c])
+
+def delete_repeat(course, constrain):
+    result = {}
+    for pre in constrain[course]:
+        #print(pre)
+        result[course] = set()
+        if pre in constrain:
+         #   print(pre, course, constrain[pre], constrain[course], constrain[course].difference_update(constrain[pre]), constrain[pre].difference_update(constrain[course]))
+            A = constrain[course].copy()
+            B = constrain[pre].copy()
+            A.difference_update(B)
+            result[course] = A.copy()
+            #print(course, pre, constrain[course], constrain[pre], "R:", result)
+        else:
+            result[course] = constrain[course]
+    return result[course].copy()
+
 if __name__ == '__main__':
     case = int(input())
     course = []
@@ -21,6 +48,15 @@ if __name__ == '__main__':
         constrain = {}
         for x in range(j):
             cons = list(map(str, input().split()))
-            constrain[cons[0]] = cons[2:]
-        print(course, constrain)
+            constrain[cons[0]] = set(cons[2:])
+        DFS(constrain)
+        #print(constrain)
+        #print(course, constrain)
+        result = {}
+        for k, v in constrain.items():
+            temp = delete_repeat(k, constrain)
+            result[k] = temp
+            #print(k, temp)
+        print(result)
+        print()
 
