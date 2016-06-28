@@ -18,7 +18,9 @@ def DFS(constrain):
     for k, v in constrain.items():
         for c in v:
             if c in constrain:
-                constrain[k].union(constrain[c])
+                temp = constrain[k].union(constrain[c]).copy()
+                print(temp, constrain[k], constrain[c])
+                v = temp
 
 def delete_repeat(course, constrain):
     result = {}
@@ -49,8 +51,7 @@ if __name__ == '__main__':
         for x in range(j):
             cons = list(map(str, input().split()))
             constrain[cons[0]] = set(cons[2:])
-        DFS(constrain)
-        #print(constrain)
+        #DFS(constrain)
         #print(course, constrain)
         result = {}
         for k, v in constrain.items():

@@ -1,29 +1,16 @@
+2 30
+10 5
+0 1 3 5 7 9 11 13 15 20 99
+4 13 15 19 20 25 30
+2 30
+10 1
+0 5 10 12 14 20 25 30
+2 4 6 8 10 12 14 22 25 28 29
+3 50
+10 50 100
+0 10 30 40
+0 20 30
+0 20 50
+1 1
 2
-5
-cc
-ca
-ce
-cb
-cd
-3
-ce 4 cd cb cc ca
-cd 3 cb cc ca
-cb 1 ca
-9
-dg
-di
-dc
-df
-de
-dd
-da
-dh
-db
-7
-dg 3 da de df
-dd 2 da db
-df 1 de
-dc 1 db
-dh 5 da de dg df dc
-de 2 da dd
-di 2 df dd
+0 2 4 6 8 10
