@@ -12,7 +12,7 @@ if __name__ == '__main__':
             n, k = list(map(int, input().split()))
             elev_speed = list(map(int, input().split()))
             for i in range(n):
-                elev_floors = list(map(int, input().split()))
+                elev_floors = set(list(map(int, input().split())))
                 elev[elev_speed[i]] = elev_floors
             print(elev)
         except(EOFError):
