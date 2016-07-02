@@ -63,13 +63,14 @@ while True:
                     graph[i][j] = graph[j][i] = 0
                 else:
                     graph[i][j] = graph[j][i] = 60
-    print(graph)
+    print(elevTime, graph)
     source = -1
     for i, v in enumerate(vertices):
         if v[1] == 0:
             source = i
             break
     dist = dijkstra(source)
+    print(dist)
     minDist = INF
     for i in range(nVertices):
         if vertices[i][1] == k:
