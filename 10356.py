@@ -18,13 +18,13 @@ def dijkstra(source):
     dist = [0] * n
     for i in range(n):
         dist[i] = graph[source][i]
+        print(dist)
     dist[source] = 0
     visited = [0] * n
     heap = []
     for i in range(n):
         heappush(heap, (dist[i], i))
     while heap:
-        print(heap)
         d1, v1 = heappop(heap)
         if d1 == INF:
             break
