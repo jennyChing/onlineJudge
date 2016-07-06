@@ -10,28 +10,28 @@ Write a program to perform this function. Your program will accept as input the 
 All coordinates are expressed in "pixel numbers", integer values ranging from 0 to 9999. A rectangle will be described by two pairs of (X,Y) coordinates. The first pair gives the coordinates of the lower left-hand corner (XLL,YLL). The second pair gives the coordinates of the upper right-hand coordinates (XUR, YUR). You are guaranteed that XLL < XUR and YLL < YUR.
 '''
 if __name__ == '__main__':
-    while True:
-        try:
-            num = int(input())
-        except(EOFError):
-            break
+    num = int(input())
+    for _ in range(num):
         empty = input()
         w1 = list(map(int, input().split()))
         w2 = list(map(int, input().split()))
         print(w1, w2)
-        if w1[3] > w2[3] and w1[1] > w1[1]:
-            print(w1[3])
+        u, d, l, r = None,None,None,None
+        if w1[3] > w2[3] and w1[1] > w2[1]:
             u, d = w2[3], w1[1]
-        elif w1[3] < w2 [3] and w1[1] < w1[1]:
+            case = 1
+        elif w1[3] < w2[3] and w1[1] < w2[1]:
             d, u = w2[3], w1[1]
-        if w1[2] > w2 [2] and w1[0] > w1[0]:
-            r, l = w2[2], w1[1]
-        elif w1[2] < w2 [2] and w1[0] < w1[0]:
-            l, r = w2[2], w1[0]
-        try:
-            print(l, d, r, u)
-        except(NameError):
+            case = 2
+        if case == 1 and w1[2] > w2[2] and w1[0] > w2[0]:
+            l, r = w1[2], w2[0]
+        elif case == 2 and w1[2] < w2[2] and w1[0] < w2[0]:
+            r, l = w1[2], w2[0]
+        if u == None or l == None:
             print("No Overlap")
+        else:
+            print(l, d, r, u)
+        print()
 
 
 
