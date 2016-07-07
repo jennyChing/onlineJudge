@@ -15,8 +15,28 @@ if __name__ == '__main__':
             n = int(input())
             if n == 0:
                 break
+            coor = []
             for _ in range(n):
-                coor = list(map(int, input().split()))
+                c = list(map(int, input().split()))
+                coor.append((c[0], c[1]))
+                coor = sorted(coor)
+            pairs = []
+            for i in range(len(coor) - 1):
+                l = coor[i]
+                dist = float('inf')
+                for j in range(i + 1, len(coor)):
+                    d = (coor[j][0] - coor[i][0])**2 + (coor[j][1] - coor[i][1])**2
+                    if d**.5 < dist:
+                        dist = d**.5
+                pairs.append(dist)
+            pairs = sorted(pairs)
+            if len(pairs) > 0:
+                if pairs[0] > 1000:
+                    print('INFINITY')
+                else:
+                    print("{0:.4f}".format(pairs[0]))
+            else:
+                print('INFINITY')
         except(EOFError):
             break
 
