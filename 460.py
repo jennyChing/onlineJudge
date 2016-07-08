@@ -11,27 +11,17 @@ All coordinates are expressed in "pixel numbers", integer values ranging from 0 
 '''
 if __name__ == '__main__':
     num = int(input())
-    for _ in range(num):
+    for i in range(num):
         empty = input()
-        w1 = list(map(int, input().split()))
-        w2 = list(map(int, input().split()))
-        print(w1, w2)
-        u, d, l, r = None,None,None,None
-        if w1[3] > w2[3] and w1[1] > w2[1]:
-            u, d = w2[3], w1[1]
-            case = 1
-        elif w1[3] < w2[3] and w1[1] < w2[1]:
-            d, u = w2[3], w1[1]
-            case = 2
-        if case == 1 and w1[2] > w2[2] and w1[0] > w2[0]:
-            l, r = w1[2], w2[0]
-        elif case == 2 and w1[2] < w2[2] and w1[0] < w2[0]:
-            r, l = w1[2], w2[0]
-        if u == None or l == None:
+        A, B, C, D = list(map(int, input().split()))
+        E, F, G, H = list(map(int, input().split()))
+        overlap = max(0, min(C, G) - max(A, E)) * max(0, min(D, H) - max(B, F))
+        if overlap <= 0:
             print("No Overlap")
         else:
-            print(l, d, r, u)
-        print()
+            print(max(A, E), max(B, F), min(C, G), min(D, H))
+        if i > 0:
+            print()
 
 
 
