@@ -12,6 +12,8 @@ All coordinates are expressed in "pixel numbers", integer values ranging from 0 
 if __name__ == '__main__':
     num = int(input())
     for i in range(num):
+        if i > 0:
+            print()
         empty = input()
         A, B, C, D = list(map(int, input().split()))
         E, F, G, H = list(map(int, input().split()))
@@ -20,8 +22,6 @@ if __name__ == '__main__':
             print("No Overlap")
         else:
             print(max(A, E), max(B, F), min(C, G), min(D, H))
-        if i > 0:
-            print()
 
 
 
